@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Course Lecture</title>
+</head>
+<style>
+	.container {
+		width: 100%;
+		display: flex;8
+		flex-direction: row;
+	}
+	.row {
+		padding: 10px;
+		border: 1px solid #333;
+		margin-right: 5px;
+		width: 500px;
+	}
+	h3 {
+		border-bottom: 1px solid red;
+		text-align: center;
+		margin-top: 10px;
+	}
+	h4 {
+		text-align: center;
+		margin-bottom: 0;
+		margin-top: 10px;
+		color: #ddd;
+	}
+	h5	{
+		display: inline;
+		border-bottom: 1px solid #666;
+	}
+pre{
+	background-color: #444;
+	color: #fff;
+	text-align: left;
+	padding: 10px;
+	/* width: 80%; */
+	/* white-space: initial; */
+	/* word-wrap: break-word; */
+	/* word-wrap: normal; */
+	/* white-space: nowrap; */
+}
+.imp {
+	background-color: gold;
+	padding: 5px;
+}
+</style>
+<body>
+<div class="container">
+	<div class="row">
+		<h4> Video 7</h4>
+		<h3>What are action and filter hooks</h3>
+		<p>
+			Hooks - execute an addtion piece of code -- a function
+			- modify existing content
+		</p>
+		<h5>2 types of hooks</h5>
+		<p>
+			<ul>
+				<li> Action Hooks <ul>
+					<li>Hooks only execute some additional code</li>
+					<li>They dont return anything to the function that called it.</li>
+					<li>without modifying existing information</li>
+				</ul></li>
+				<li> Filters</li>
+						<ul>
+							<li>Modify existing function</li>
+							<li>Can also erase existing return value</li>
+							<li>We generally pass a variable as a parameter</li>
+						</ul>
+			</ul>
+<code>
+<pre>
+function test(){}
+
+add_action('hook', 'test')
+add_filter('filter', 'test')
+</pre>
+</code>
+			</p>
+	</div>	
+	<div class="row">
+		<h4>Vid 8</h4>
+		<h3>Action Hooks</h3>
+		<ul>
+			<li>do_action()</li>
+			<li>add_action()</li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<h4>Vid 9</h4>
+		<h3>Filters</h3>
+
+<p> apply_filter  <ul>
+	<li>- the one that defines the filter within WP code</li>
+	<li>- 2 args <ul>
+		<li>1st name of filter daw in this case the_content <ul>
+			sample code 
+			<li>
+<pre>
+function the_content($more_link_text = null, $strip_teaser = false){
+	$content = get_the_content( $more_link_text, $strip_teaser);
+
+	$content = apply_filters( 'the_content', $content );
+	$content = str_replace(']]>', ']]&gt;', $content )
+	echo $content;
+}
+</pre>
+			</li>
+		</ul> </li>
+		<li></li>
+	</ul> </li> 
+</ul></p>
+
+<p> add_filter <ul>
+	<li>  </li>
+</ul></p>
+<pre>
+function modify_content( $content ) {
+	$content = $content. 'Copyright 2021, All right reserve';
+	return $content;
+}
+add_filter( 'the_content', 'modify_content' )
+</pre>		
+<p>
+	the method we are modifying is the_content - tapos ng magiging value o return non
+	is ung nasa modify_content function
+</p>
+	</div>
+
+	<div class="row">
+		<h4>vid 11</h4>
+		<h3>Structuring the plugin</h3>
+		<p>
+			Creating folders under ms-slider <ul>
+				<li>assets,functions,language,post-types,vendor, views,shortcode</li>
+				<li>then we create mv-slider.php and put ?php open tag only inside to prevent <span class="imp">Headers already sent</span></li>
+			</ul>
+		</p>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

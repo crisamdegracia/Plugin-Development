@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="jquery-v3.5.1.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="./node_modules/skeleton-css/css/skeleton.css"
+		/>
+		<link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.min.css" />
+		<title>Trillo Project</title>
+	</head>
+	<body>
+		<header>
+			<div
+				class="header--container header--container--trillo container text-center u-max-full-width"
+			>
+				<h1 class="header--heading m-0">Trillo</h1>
+				<p class="m-0">
+					A course guide for WordPress Plugin Development
+					<span>
+						<pre class="m-0">
+Creating WordPress Plugins The Right Way by: Marcelo Xavier Vieira
+</pre>
+					</span>
+				</p>
+			</div>
+		</header>
+
+		<main class="container custom__container u-max-full-width">
+			<section
+				class="section--right-panel two-thirds column mt-40"
+				id="accordion"
+			>
+				<h3>Video 7 - What are action and filter hooks</h3>
+				<div>
+					<pre>
+	<h5>Hooks</h5>
+		- execute an addtion piece of code or a function
+		- modify existing content
+		<h5>2 types of hooks</h5>
+		Action Hooks 
+		- Hooks only execute some additional code
+		-They dont return anything to the function that called it.
+		- without modifying existing information
+		<code>
+			<pre>
+			function test(){}
+			
+			add_action('hook', 'test')
+			add_filter('filter', 'test')
+			</pre>
+			</code>
+					</pre>
+				</div>
+				<h3>f7v68</h3>
+			</section>
+		</main>
+	</body>
+	<script src="./jquery-ui-1.12.1/jquery-ui.min.js"></script>
+	<script>
+		$(function () {
+			$("#accordion").accordion({
+				collapsible: true,
+				heightStyle: "content",
+			});
+		});
+	</script>
+</html>
