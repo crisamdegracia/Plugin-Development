@@ -1,176 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Course Lecture</title>
-</head>
-<style>
-	.container {
-		width: 100%;
-		display: flex;8
-		flex-direction: row;
-	}
-	.row {
-		padding: 10px;
-		border: 1px solid #333;
-		margin-right: 5px;
-		width: 500px;
-	}
-	h3 {
-		border-bottom: 1px solid red;
-		text-align: center;
-		margin-top: 10px;
-	}
-	h4 {
-		text-align: center;
-		margin-bottom: 0;
-		margin-top: 10px;
-		color: #ddd;
-	}
-	h5	{
-		display: inline;
-		border-bottom: 1px solid #666;
-	}
-pre{
-	background-color: #444;
-	color: #fff;
-	text-align: left;
-	padding: 10px;
-	/* width: 80%; */
-	/* white-space: initial; */
-	/* word-wrap: break-word; */
-	/* word-wrap: normal; */
-	/* white-space: nowrap; */
-}
-.imp {
-	background-color: gold;
-	padding: 5px;
-}
-</style>
-<body>
-<div class="container">
-	<div class="row">
-		<h4> Video 7</h4>
-		<h3>What are action and filter hooks</h3>
-		<p>
-			Hooks - execute an addtion piece of code -- a function
-			- modify existing content
-		</p>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="jquery-v3.5.1.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="./node_modules/skeleton-css/css/skeleton.css"
+		/>
+		<link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.min.css" />
+		<title>Trillo Project</title>
+	</head>
+	<body>
+		<header>
+			<div
+				class="header--container header--container--trillo container text-center u-max-full-width"
+			>
+				<h1 class="header--heading m-0">Plugin Development</h1>
+				<p class="m-0">
+					A course guide for WordPress Plugin Development
+					<span>
+						<pre class="m-0">
+Creating WordPress Plugins The Right Way by: Marcelo Xavier Vieira
+</pre>
+					</span>
+				</p>
+			</div>
+		</header>
+
+		<main class="container custom__container u-max-full-width">
+			<section
+				class="section--right-panel two-thirds column mt-40"
+				id="accordion"
+			>
+				<h3>Video 7 - What are action and filter hooks</h3>
+				<div>
+					<pre>
+	<h5>Hooks</h5>
+		- execute an addtion piece of code or a function
+		- modify existing content
 		<h5>2 types of hooks</h5>
-		<p>
-			<ul>
-				<li> Action Hooks <ul>
-					<li>Hooks only execute some additional code</li>
-					<li>They dont return anything to the function that called it.</li>
-					<li>without modifying existing information</li>
-				</ul></li>
-				<li> Filters</li>
-						<ul>
-							<li>Modify existing function</li>
-							<li>Can also erase existing return value</li>
-							<li>We generally pass a variable as a parameter</li>
-						</ul>
-			</ul>
-<code>
-<pre>
-function test(){}
+		Action Hooks 
+		- Hooks only execute some additional code
+		-They dont return anything to the function that called it.
+		- without modifying existing information
 
-add_action('hook', 'test')
-add_filter('filter', 'test')
+		Filters
+		- Modify existing function
+		- Can also erase existing return value
+		- We generally pass a variable as a parameter
+		<code>
+			<pre>
+			function test(){}
+			
+			add_action('hook', 'test')
+			add_filter('filter', 'test')
+			</pre>
+			</code>
+					</pre>
+				</div>
+				<h3>Vid 8 - Magulo ung paliwanag</h3>
+				<div>
+					Action Hooks
+					- do_action()
+					- add_action()
+				</div>
+
+
+
+				<h3>Vid 9 - Filters</h3>
+				<div>
+					<pre>
+					<h5>apply_filter</h5>
+					- the one that defines the filter within WP code
+					- 2 args
+					- 1st name of filter daw in this case the_content 
+					
+					<pre><code>
+						function the_content($more_link_text = null, $strip_teaser = false){
+							$content = get_the_content( $more_link_text, $strip_teaser);
+							
+							$content = apply_filters( 'the_content', $content );
+							$content = str_replace(']]>', ']]&gt;', $content )
+							echo $content;
+						}
+						
+					</code></pre>
+					<h5>add_filter </h5>
+					<pre>
+						<code>
+							function modify_content( $content ) {
+								$content = $content. 'Copyright 2021, All right reserve';
+								return $content;
+							}
+							add_filter( 'the_content', 'modify_content' )
+						</code>
+					</pre>
+						the method we are modifying is the_content - tapos ng magiging value o return non
+						is ung nasa modify_content function
+				</pre>
+				</div>
+
+				<h3>Vid 11 - Structuring the plugin</h3>
+				<div>
+				<h5>Creating folders under ms-slider</h5>
+				<ul>
+					<li>assets,functions,language,post-types,vendor, views,shortcode</li>
+					<li>then we create mv-slider.php and put ?php open tag only inside to prevent <span class="imp">Headers already sent</span></li>
+				
+				</ul>
+				</div>
+
+				<h3>Vid 12 - Plugins with classes VS. Plugins without classes</h3>
+				<div>
+					<pre>
+
+		<pre>
+		kaya daw my ganto - is to allow other Developer if they wish to override this whole class in a different way
+			<code>
+			if( ! class_exists( 'MV_Slider') ){
+				class MV_slider {
+
+				}
+			}
+			</code>
+		</pre>
+
+					</pre>
+				</div>
+					
+			<h3>Vid 13 - Defining constants</h3>
+			<div>
+<pre>
+	<code>
+		if( ! class_exists( 'MV_Slider') ){
+			class MV_slider {
+				//Constructor - the first method to be executed;
+				function __construct(){
+		
+					//calling define_constants function
+					$this->define_constants();
+				}
+		
+				public function define_constants(){
+					//home/www/my_site/wp-content/plugin/your-plugin
+					define( 'MV_SLIDER_PATH', plugin_dir_path( __FILE__ ) );
+					// http://example.com/wp-content/plugins/mv-slider
+					define( 'MV_SLIDER_URL', plugin_dir_url( __FILE__ ) );
+					//Plugin version
+					define( 'MV_SLIDER_VERSION', '1.0.0' );
+				}
+			}
+		}
+		
+		
+		if( class_exists( 'MV_Slider') ){
+		 
+			$mv_slider = new MV_slider();
+		}
+	</code>
 </pre>
-</code>
-			</p>
-	</div>	
-	<div class="row">
-		<h4>Vid 8</h4>
-		<h3>Action Hooks</h3>
-		<ul>
-			<li>do_action()</li>
-			<li>add_action()</li>
-		</ul>
-	</div>
+			</div>
 
-	<div class="row">
-		<h4>Vid 9</h4>
-		<h3>Filters</h3>
-
-<p> apply_filter  <ul>
-	<li>- the one that defines the filter within WP code</li>
-	<li>- 2 args <ul>
-		<li>1st name of filter daw in this case the_content <ul>
-			sample code 
-			<li>
+			<h3>vid 14 - Activate, Deactivate and uninstall methods</h3>
+			<div>
 <pre>
-function the_content($more_link_text = null, $strip_teaser = false){
-	$content = get_the_content( $more_link_text, $strip_teaser);
-
-	$content = apply_filters( 'the_content', $content );
-	$content = str_replace(']]>', ']]&gt;', $content )
-	echo $content;
-}
+	
 </pre>
-			</li>
-		</ul> </li>
-		<li></li>
-	</ul> </li> 
-</ul></p>
-
-<p> add_filter <ul>
-	<li>  </li>
-</ul></p>
-<pre>
-function modify_content( $content ) {
-	$content = $content. 'Copyright 2021, All right reserve';
-	return $content;
-}
-add_filter( 'the_content', 'modify_content' )
-</pre>		
-<p>
-	the method we are modifying is the_content - tapos ng magiging value o return non
-	is ung nasa modify_content function
-</p>
-	</div>
-
-	<div class="row">
-		<h4>vid 11</h4>
-		<h3>Structuring the plugin</h3>
-		<p>
-			Creating folders under ms-slider <ul>
-				<li>assets,functions,language,post-types,vendor, views,shortcode</li>
-				<li>then we create mv-slider.php and put ?php open tag only inside to prevent <span class="imp">Headers already sent</span></li>
-			</ul>
-		</p>
-	</div>
-</div>
+			</div>
+			
+			
+			
+			
+			
+			
+		<a href="https://www.facebook.com/tutorialhubph" target="_blank">
+			<i class="footer__icon fab fa-facebook" style="color:ddd; width:50px"></i>
+		</a>	
+			<a href="﻿https://www.instagram.com/tutorialhub.ph/" target="_blank">
+			<i class="footer__icon fab fa-instagram" style="color:ddd; width:50px"></i>
+		</a>	
+		
+			
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</body>
+			
+			
+			
+			
+			
+			
+				</section>
+		</main>
+	</body>
+	<script src="./jquery-ui-1.12.1/jquery-ui.min.js"></script>
+	<script>
+		$(function () {
+			$("#accordion").accordion({
+				collapsible: true,
+				heightStyle: "content",
+			});
+		});
+	</script>
 </html>
