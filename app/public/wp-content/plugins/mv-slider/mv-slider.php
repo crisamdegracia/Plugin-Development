@@ -26,6 +26,8 @@ whenever you have a string that has  to be translated,
 if the file access directly - it stop the execution of the script with the exit method
 
 */
+
+
 if (! defined( 'ABSPATH' ) ){
 	die('A message if somebody directly execute the file');
 	exit;
@@ -49,6 +51,9 @@ if( ! class_exists( 'MV_Slider') ){
 			define( 'MV_SLIDER_VERSION', '1.0.0' );
 		}
 
+
+
+		// Calling activate will create a post type - kaya dun gumawa tayo ng custom post type
 		public static function activate(){
 			//ginamit nya ung update_option( 'rewrite_rules' )
 			//kasidaw in his experience deleting the values from the table on activation works better than calling this function
@@ -57,6 +62,9 @@ if( ! class_exists( 'MV_Slider') ){
 
 			// Vid 14 to
 			//direct erasing the values in the table record
+			//mabubura ung andun sa SQL DB->wp_options pero. kapag nag create daw ng something like postype mag rerecreatea lahat ng values
+			//this cannot be done daw all the time because very long process
+			// so recomended to only for activating plugin
 			update_option( 'rewrite_rules', '' );
 
 		}
@@ -77,18 +85,18 @@ if( ! class_exists( 'MV_Slider') ){
 
 
 if( class_exists( 'MV_Slider') ){
-
+	//1st is the name of the file that will be used to name the hook that performs the plugin and activation
 	// ung 2nd parameter daw must be s static function or method - activate,deactivae,uninstall
 	//the idea daw is you dont have to be forced to instantiate an object to have access to this method
 	// inside array we pass the php Class name and method name
 	// it wiill create daw an action hook active_mv-slider/mv-slider.php
-	register_activation_hook( __FILE, array( 'MV_Slider', 'activate') );
+	register_activation_hook( __FILE__, array( 'MV_Slider', 'activate') );
 
 	// it wiill create daw an action hook active_mv-slider/mv-slider.php
-	register_deactivation_hook( __FILE, array( 'MV_Slider', 'deactivate') );
+	register_deactivation_hook( __FILE__, array( 'MV_Slider', 'deactivate') );
 
 	// it wiill create daw an action hook active_mv-slider/mv-slider.php
-	register_uninstall_hook( __FILE, array( 'MV_Slider', 'uninstall') );
+	register_uninstall_hook( __FILE__, array( 'MV_Slider', 'uninstall') );
 
 	$mv_slider = new MV_slider();
 }
