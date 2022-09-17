@@ -1,0 +1,2 @@
+# to search sa Database
+SELECT post_type FROM 'wp_posts' GROUP BY post_type
