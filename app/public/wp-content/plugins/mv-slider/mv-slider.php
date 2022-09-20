@@ -29,6 +29,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+
+// kung walang MV slider class, gagawa dito. 
 if (!class_exists('MV_Slider')) {
     class MV_slider {
         //Constructor - the first method to be executed;
@@ -40,8 +42,8 @@ if (!class_exists('MV_Slider')) {
 
 			//nirequire once natin para makuha natin ung file tapos i-call natin sya
 			require_once( MV_SLIDER_PATH . 'post-types/class_mv-slider-cpt.php');
-
 			$MV_Slider_Post_Type = new MV_Slider_Post_Type();
+            
         }
 
         public function define_constants() {

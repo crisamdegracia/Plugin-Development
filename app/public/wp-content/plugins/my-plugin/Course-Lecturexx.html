@@ -148,6 +148,32 @@ add_filter( 'the_content', 'modify_content' )
 	<div class="row">
 		<h4>Vid 17</h4>
 		<h3>Metabox API — What are metaboxes?</h3>
+		<p>
+			Example thoughs - sa Database merong wp_post and wp_postmeta --
+			sa wp_post - doon, title, author, content, etc
+			sa wp_postmeta - _attachment_ blah blah. ganun pala ung connection! aha!
+		</p>
+	</div>
+
+	
+	<div class="row">
+		<h4>Vid 20</h4>
+		<h3>Metabox API - Saving metabox data</h3>
+		<p>
+		add_post_meta - to add values to the Database
+		get_post_meta - to get values stored in the database
+		updata_post_meta - to update
+	    delete_post_meta - to delete 
+
+		all function above are wrappers of
+		add_postmeta
+		get_postmeta
+		update_postmeta
+		delete_postmeta
+			these 4 functions - perform CRUD on the metadata tables. all these are what we call wrapper functions
+
+			update_post_meta works for all post types, while update_postmeta just works on post
+		</p>
 	</div>
 </div>
 
