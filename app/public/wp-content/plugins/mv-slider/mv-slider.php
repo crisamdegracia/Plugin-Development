@@ -29,26 +29,24 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-
-// kung walang MV slider class, gagawa dito. 
+// kung walang MV slider class, gagawa dito.
 if (!class_exists('MV_Slider')) {
     class MV_slider {
         //Constructor - the first method to be executed;
         function __construct() {
 
             //calling define_constants function
-            $this->define_constants(); 
+            $this->define_constants();
 
+            //nirequire once natin para makuha natin ung file tapos i-call natin sya
+            require_once MV_SLIDER_PATH . 'post-types/class_mv-slider-cpt.php';
+            $MV_Slider_Post_Type = new MV_Slider_Post_Type();
 
-			//nirequire once natin para makuha natin ung file tapos i-call natin sya
-			require_once( MV_SLIDER_PATH . 'post-types/class_mv-slider-cpt.php');
-			$MV_Slider_Post_Type = new MV_Slider_Post_Type();
-            
         }
 
         public function define_constants() {
             //home/www/my_site/wp-content/plugin/your-plugin
-			//the output already gives us trailing slash
+            //the output already gives us trailing slash
             define('MV_SLIDER_PATH', plugin_dir_path(__FILE__));
             // http://example.com/wp-content/plugins/mv-slider
             define('MV_SLIDER_URL', plugin_dir_url(__FILE__));
@@ -75,9 +73,8 @@ if (!class_exists('MV_Slider')) {
             //ginamit nya daw dito eto kasi daw wala naman daw idedelete unlike sa activate method()
             flush_rewrite_rule();
 
-
-			//ep 16
-			unregister_post_type('mv-slider');
+            //ep 16
+            unregister_post_type('mv-slider');
         }
 
         // before public function uninstall(){}
