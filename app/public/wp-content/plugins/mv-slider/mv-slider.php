@@ -35,13 +35,20 @@ if (!class_exists('MV_Slider')) {
         //Constructor - the first method to be executed;
         function __construct() {
 
+
+            //eto para mag add ng left-menu sa WPbackend 
+            add_action('admin_menu', array($this, 'add_menu'));
+
+
             //calling define_constants function
             $this->define_constants();
 
             //nirequire once natin para makuha natin ung file tapos i-call natin sya
             require_once MV_SLIDER_PATH . 'post-types/class_mv-slider-cpt.php';
             $MV_Slider_Post_Type = new MV_Slider_Post_Type();
-
+            
+            require_once MV_SLIDER_PATH . 'class.mv-slider-settings.php';
+            $MV_Slider_Settings = new MV_Slider_Settings();
         }
 
         public function define_constants() {
@@ -53,6 +60,73 @@ if (!class_exists('MV_Slider')) {
             //Plugin version
             define('MV_SLIDER_VERSION', '1.0.0');
         }
+
+        public function add_menu() {
+
+            //7parameters but not all mandatory
+            //1st title for menu page, 2nd menu title
+            //3rd is the type of capability that the WP user need to have access
+                //what do we mean by that , not every user is created equal daw in WP
+                //for example [Super Admin], [ Admin], [editor], [author], [contributor], [subscriber]
+                // then they can edit, they can post, can delete, list goes on
+            //4th is a short name or a slug for the page in the admin.
+            //5th is a callback 
+            //6th is the icon, 7th is the meny position hindi na nilagay - kasi daw meron ng sariling order ung WP
+
+            //add_theme_page - mag aapear don sa Appearance - 
+            //add_option_page - mag aapear don sa setting
+            add_menu_page(
+                esc_html__('MV Slider Options', 'mv-slider'),
+                'MV Slider',
+                'manage_options',
+                'mv_slider_admin',
+                array($this, 'mv_slider_settings_page'),
+                'dashicons-images-alt2'
+            );
+
+
+            //also accept 7 parameter
+            // 1st param if from 4th parameter of add_menu_page
+            //2nd
+            add_submenu_page(
+                'mv_slider_admin',
+                esc_html__( 'Manage Slides', 'mv-slider' ),
+                esc_html__( 'Manage Slides', 'mv-slider' ),
+                'manage_options',
+                'edit.php?post_type=mv-slider',
+                null,
+                null
+            );
+
+
+            //Pektus 
+            add_submenu_page(
+                'mv_slider_admin', // Pektus.  for example we want to add sub-menu sa Comment sidebar - ilalagay lang natin to edit-comments.php you get the Idea?
+                esc_html__( 'Add New Slide', 'mv-slider' ),
+                esc_html__( 'Add New Slide', 'mv-slider' ),
+                'manage_options',
+                'post-new.php?post_type=mv-slider',
+                null,
+                null
+            );
+
+        }
+
+        //eto ung callback ng
+        public function mv_slider_settings_page(){
+            if( ! current_user_can( 'manage_options' ) ){
+                return;
+            }
+
+            if( isset( $_GET['settings-updated'] ) ){
+                add_settings_error( 'mv_slider_options', 'mv_slider_message', esc_html__( 'Settings Saved', 'mv-slider' ), 'success' );
+            }
+            
+            settings_errors( 'mv_slider_options' );
+
+            // require( MV_SLIDER_PATH . 'views/settings-page.php' );
+        }
+
 
         // Calling activate will create a post type - kaya dun gumawa tayo ng custom post type
         public static function activate() {

@@ -40,9 +40,9 @@ if (!class_exists('MV_Slider_Post_Type')) {
                     // ang usage neto pwede gumawa ng parent-child relationship sa post
                     // so false sya kasi hndi need
                     'show_ui' => true,
-                    'show_in_menu' => true,
+                    'show_in_menu' => false, // True to, kasi gnawa false para isang give way sa menu - kasi dalawa sila andun Vid 26
                     'menu_position' => 5,
-                    'show_in_admin_bar' => true,
+                    'show_in_admin_bar' => true, //
                     'show_in_nav_menus' => true, // pwede makita sa Menu nav bar
                     'can_export' => true, // pwede makita dun sa Tools export
                     'has_archive' => false, // kapag true pwede mong gawan sa archive-post-type, tapos makikita rin sa Menu navbar pwedeng iadd.
