@@ -49,7 +49,10 @@ if( ! class_exists( 'MV_Slider_Settings' )){
 
 
 			// 1st param is an ID - this is going to be an ID for the field inside the database table
-
+			// 2nd is the title of the field
+			// 3rd param is call back the creates the fields content
+			// 4th is the ID of the page wher this field has to appear - ung kreate natin sa taas
+			// 5th is the ID of the section it has to appear
             add_settings_field(
                 'mv_slider_shortcode',
                 esc_html__( 'Shortcode', 'mv-slider' ),

@@ -12,6 +12,12 @@
         <a href="?page=mv_slider_admin&tab=main_options" class="nav-tab <?php echo $active_tab == 'main_options' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Main Options', 'mv-slider' ); ?></a>
         <a href="?page=mv_slider_admin&tab=additional_options" class="nav-tab <?php echo $active_tab == 'additional_options' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( 'Additional Options', 'mv-slider' ); ?></a>
     </h2>
+
+    <!--
+          ung form daw masa-submit sa options.php pwede makita ung page nayon by accessing wp-admin/options.php
+        kapag nasubmit daw doon. ichechek kung my error or wala,
+        kung wala irereturn sa page?? — hindi nadaw kaylangan gumawa ng file na options.php
+-->
     <form action="options.php" method="post">
     <?php 
         if( $active_tab == 'main_options' ){
