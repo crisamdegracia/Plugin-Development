@@ -41,7 +41,7 @@ if (!class_exists('MV_Slider_Post_Type')) {
                     // so false sya kasi hndi need
                     'show_ui' => true,
                     'show_in_menu' => false, // True to, kasi gnawa false para isang give way sa menu - kasi dalawa sila andun Vid 26
-                    'menu_position' => 5,
+                    'menu_position' => 5, //5 below post - 10 below media - 15 below links - search mo nalang
                     'show_in_admin_bar' => true, //
                     'show_in_nav_menus' => true, // pwede makita sa Menu nav bar
                     'can_export' => true, // pwede makita dun sa Tools export
@@ -53,6 +53,7 @@ if (!class_exists('MV_Slider_Post_Type')) {
                     // so ayon nga, hindi na ung lumang editor once naka show_in_rest = true
                     'menu_icon' => 'dashicons-images-alt2',
 
+                    
                     //same daw dun sa add_action( 'add_meta_boxed' )
                     //it can recieves a function or cb merhod that can be used to register a metabox
                     // 'register_meta_box_cb' => array($this, 'add_meta_boxes')

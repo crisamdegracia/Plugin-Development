@@ -29,6 +29,9 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+
+echo get_post_meta($post->ID);
+echo get_posts();
 // kung walang MV slider class, gagawa dito.
 if (!class_exists('MV_Slider')) {
     class MV_slider {
