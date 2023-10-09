@@ -29,9 +29,6 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-
-echo get_post_meta($post->ID);
-echo get_posts();
 // kung walang MV slider class, gagawa dito.
 if (!class_exists('MV_Slider')) {
     class MV_slider {
@@ -64,8 +61,7 @@ if (!class_exists('MV_Slider')) {
             define('MV_SLIDER_VERSION', '1.0.0');
         }
 
-        public function add_menu() {
-
+        public function add_menu() { 
             //7parameters but not all mandatory
             //1st title for menu page, 2nd menu title
             //3rd is the type of capability that the WP user need to have access
@@ -75,6 +71,7 @@ if (!class_exists('MV_Slider')) {
             //4th is a short name or a slug for the page in the admin.
             //5th is a callback 
             //6th is the icon, 7th is the meny position hindi na nilagay - kasi daw meron ng sariling order ung WP
+            //7th menu position - d na nya sinama
 
             //add_theme_page - mag aapear don sa Appearance - 
             //add_option_page - mag aapear don sa setting
@@ -82,7 +79,7 @@ if (!class_exists('MV_Slider')) {
                 esc_html__('MV Slider Options', 'mv-slider'),
                 'MV Slider',
                 'manage_options',
-                'mv_slider_admin',
+                'mv_slider_admin', // etoooo
                 array($this, 'mv_slider_settings_page'),
                 'dashicons-images-alt2'
             );
@@ -90,9 +87,14 @@ if (!class_exists('MV_Slider')) {
 
             //also accept 7 parameter
             // 1st param if from 4th parameter of add_menu_page
-            //2nd
+            //2nd Page title - 3rd menu title
+            //4th - is the capability that the user needs to access this menu
+            //5th - it will cauase the page to load using the link 
+                // complete link WEBSITEURL.com/wp-admin/[edit.php?post_type=mv-slider]
+            //6th - if we are creating new content daw it will be a function
+            //7th - position
             add_submenu_page(
-                'mv_slider_admin',
+                'mv_slider_admin', /// etooo
                 esc_html__( 'Manage Slides', 'mv-slider' ),
                 esc_html__( 'Manage Slides', 'mv-slider' ),
                 'manage_options',
@@ -113,9 +115,10 @@ if (!class_exists('MV_Slider')) {
                 null
             );
 
+
         }
 
-        //eto ung callback ng
+        //eto ung callback ng add_menu_page ung pang apat
         public function mv_slider_settings_page(){
             if( ! current_user_can( 'manage_options' ) ){
                 return;

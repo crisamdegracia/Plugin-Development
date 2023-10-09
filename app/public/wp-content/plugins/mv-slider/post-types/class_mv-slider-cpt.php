@@ -10,7 +10,7 @@ if (!class_exists('MV_Slider_Post_Type')) {
             add_action('save_post', array($this, 'save_post'), 10, 2);
 
             //to add filtering in the list of the posts
-            // starts with manaege_[CPT KEY] then [_posts_columns]
+            // starts with manage_[CPT KEY] then [_posts_columns]
             add_filter('manage_mv-slider_posts_columns', array($this, 'mv_slider_cpt_columns'));
 
             //to add value to the columns
@@ -19,8 +19,9 @@ if (!class_exists('MV_Slider_Post_Type')) {
 
             //it will sort the table in the column using the Name column
             //since we didnt spcify the number of parameters - that means this methos will only accept one parameter
-            add_filter('manage_edit-mv-silder_sortable_columns', array($this, 'mv_silder_sortable_columns'));
-            add_filter('manage_edit-mv-slider_sortable_columns', array($this, 'mv_slider_sortable_columns'));
+            //mv_silder_sortable_columns - this name daw doesnt matter - this is a callback function
+            add_filter('manage_edit-mv-silder_sortable_columns', array($this, 'mv_silder_sortable_columns')); 
+            add_filter('manage_edit-mv-slider_sortable_columns', array($this, 'mv_slider_sortable_columns')); //
 
         }
 
@@ -119,7 +120,7 @@ if (!class_exists('MV_Slider_Post_Type')) {
         }
 
         //Parameter $post is - $post object -very important coz WP has to know which post will reciv the data from our metabox
-
+        // eto ung field ng text and url                  
         public function add_inner_meta_boxes($post) {
             require_once MV_SLIDER_PATH . 'views/mv-slider_metabox.php';
         }
@@ -129,6 +130,7 @@ if (!class_exists('MV_Slider_Post_Type')) {
 
 // ----------- GUARD CLAUSE  ------------------------------------------------- //
             // Guard clause use to exit functions early if the condition is not met
+            // para hnd na daw mag create ng maraming IF ELSE
             if (isset($_POST['mv_slider_nonce'])) {
                 //check value if not expected value 1st arg: the value 2nd arg: name of nonce
                 if (!wp_verify_nonce($_POST['mv_slider_nonce'], 'mv_slider_nonce')) {
@@ -137,7 +139,7 @@ if (!class_exists('MV_Slider_Post_Type')) {
                 }
             }
             //avoid auto save
-            if (defined(' DOIN_AUTOSAVE') && DOING_AUTOSAVE) {
+            if (defined('DOIN_AUTOSAVE') && DOING_AUTOSAVE) {
                 return;
             }
             //verify if the user can access page and make use the post type editing screen
@@ -168,6 +170,7 @@ if (!class_exists('MV_Slider_Post_Type')) {
                 $new_link_url = $_POST['mv_slider_link_url'];
 
                 if (empty($new_link_text)) {
+
                     //1st ID, 2md Metakey, 3rd new value, 4th old value
                     update_post_meta($post_id, 'mv_slider_link_text', esc_html__('Add some text', 'mv-slider'));
                 } else {

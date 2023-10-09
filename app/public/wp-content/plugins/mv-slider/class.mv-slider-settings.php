@@ -19,7 +19,7 @@ if( ! class_exists( 'MV_Slider_Settings' )){
 
 		//we will create 2 section and 4 fields
         public function admin_init(){
-            
+
             register_setting( 'mv_slider_group', 'mv_slider_options', array( $this, 'mv_slider_validate' ) );
 
 
