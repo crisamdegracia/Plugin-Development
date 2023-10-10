@@ -37,7 +37,7 @@ if (!class_exists('MV_Slider')) {
 
 
             //eto para mag add ng left-menu sa WPbackend 
-            add_action('admin_menu', array($this, 'add_menu'));
+            add_action('admin_menu', array( $this , 'add_menu'));
 
 
             //calling define_constants function
@@ -121,7 +121,7 @@ if (!class_exists('MV_Slider')) {
         //eto ung callback ng add_menu_page ung pang apat
         public function mv_slider_settings_page(){
             if( ! current_user_can( 'manage_options' ) ){
-                return;
+                return; 
             }
 
             if( isset( $_GET['settings-updated'] ) ){
@@ -130,7 +130,7 @@ if (!class_exists('MV_Slider')) {
             
             settings_errors( 'mv_slider_options' );
 
-            // require( MV_SLIDER_PATH . 'views/settings-page.php' );
+            require( MV_SLIDER_PATH . 'views/settings-page.php' );
         }
 
 

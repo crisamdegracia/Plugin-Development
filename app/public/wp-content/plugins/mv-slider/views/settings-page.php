@@ -14,10 +14,15 @@
     <!--ung form daw masa-submit sa options.php pwede makita ung page nayon by accessing wp-admin/options.php
         kapag nasubmit daw doon. ichechek kung my error or wala,
         kung wala irereturn sa page?? — hindi nadaw kaylangan gumawa ng file na options.php 
-    the form - needs 3 things
+    the form - needs things - fields and submit button
     -->
     <form action="options.php" method="post">
-    <?php if( $active_tab == 'main_options' ){
+        
+    <?php
+      settings_fields( 'mv_slider_group' );
+      do_settings_sections( 'mv_slider_page1' );
+    
+    if( $active_tab == 'main_options' ){
             settings_fields( 'mv_slider_group' );
             do_settings_sections( 'mv_slider_page1' );
         }else{

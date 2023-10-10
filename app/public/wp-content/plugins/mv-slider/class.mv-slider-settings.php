@@ -20,6 +20,9 @@ if( ! class_exists( 'MV_Slider_Settings' )){
 		//we will create 2 section and 4 fields
         public function admin_init(){
 
+            //Nothing will be save to the database unless daw we register our KEY
+            //1st - is called option_group  - this will be use to group all the option and all the settings on the page
+                // it accepts - general, discussion, media, reading, writing, misc, options, privacy — which refer to native  Wordpress Items
             register_setting( 'mv_slider_group', 'mv_slider_options', array( $this, 'mv_slider_validate' ) );
 
 
@@ -39,6 +42,7 @@ if( ! class_exists( 'MV_Slider_Settings' )){
                 'mv_slider_page1'
             );
 
+            //eo ung 2nd tab - additional tab
             add_settings_section(
                 'mv_slider_second_section',
                 esc_html__( 'Other Plugin Options', 'mv-slider' ),
